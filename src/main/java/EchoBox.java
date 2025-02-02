@@ -28,9 +28,6 @@ public class EchoBox {
             } else if (userInput.equalsIgnoreCase("sad")) {
                 System.out.println("EchoBox: Don't be sad! Here's a hug 🤗");
             } else if (userInput.equalsIgnoreCase("list")) {
-                System.out.println("Here are the tasks in your list: ");
-                for (int i = 0; i < taskCount; i++) { // Display task list
-                    System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
                 for (int i = 0; i < taskCount; i++) {
                     System.out.println("   " + (i) + ". " + tasks[i]);
                 }
