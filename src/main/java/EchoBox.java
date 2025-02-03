@@ -1,41 +1,55 @@
 import java.util.Scanner;
 
+
 public class EchoBox {
     // Task class to represent a task
     static class Task {
         protected String description;
         protected boolean isDone;
 
+
         public Task(String description) {
             this.description = description;
             this.isDone = false;
         }
+
+
         public String getStatusIcon() {
             return (isDone ? "X" : " "); // Mark done task with X
         }
+
+
         public void markAsDone() {
             isDone = true;
         }
+
+
         public void unmarkAsDone() {
             isDone = false;
         }
     }
 
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Task[] tasks = new Task[100]; // Fixed-size array for storing tasks
-        int taskCount = 0;
+        int taskCount = 0; // Counter for stored tasks
 
-        System.out.println("🤖 Hello! I'm EchoBox!");
+
+        System.out.println("Hello! I'm EchoBox"); // Your chatbot's new name
         System.out.println("😊 How can I help you today?");
+
 
         while (true) {
             String userInput = scanner.nextLine();
+
 
             if (userInput.equalsIgnoreCase("bye")) {
                 System.out.println("EchoBox: 👋 Bye! Hope to see you again soon! 🚀");
                 break;
             }
+
+
             if (userInput.equalsIgnoreCase("Hello")) {
                 System.out.println("EchoBox: Hey there! 😊 How’s your day?");
             } else if (userInput.equalsIgnoreCase("sad")) {
