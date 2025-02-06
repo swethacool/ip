@@ -1,3 +1,4 @@
+import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
 public class EchoBox {
@@ -74,27 +75,29 @@ public class EchoBox {
     }
 
     public static void main(String[] args) {
+        String simulatedInput = "Hello\nlist\nbye\n"; // Simulated user inputs
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes())); // Simulate input for Scanner
         Scanner scanner = new Scanner(System.in);
         Task[] tasks = new Task[100];
         int taskCount = 0; // Counter for stored tasks
 
 
         System.out.println("Hello! I'm EchoBox");
-        System.out.println("😊 How can I help you today?");
+        System.out.println("How can I help you today?");
 
 
         while (true) {
             String userInput = scanner.nextLine();
 
             if (userInput.equalsIgnoreCase("bye")) {
-                System.out.println("EchoBox: 👋 Bye! Don't forget to take breaks! See you soon! 🚀");
+                System.out.println("EchoBox: Bye! Don't forget to take breaks! See you soon!");
                 break;
             }
 
             if (userInput.equalsIgnoreCase("Hello")) {
-                System.out.println("EchoBox: Hey there! 😊 How’s your day?");
+                System.out.println("EchoBox: Hey there! How is your day?");
             } else if (userInput.equalsIgnoreCase("sad")) {
-                System.out.println("EchoBox: Don't be sad! Here's a hug 🤗");
+                System.out.println("EchoBox: Don't be sad! Here's a hug");
             }
             if (userInput.equalsIgnoreCase("list")) {
                 System.out.println("Here are the tasks in your list: ");
@@ -111,7 +114,7 @@ public class EchoBox {
                     System.out.println("EchoBox: Nice! I've marked this task as done: ");
                     System.out.println(tasks[taskNum]); // Use `toString()` to show updated task
                 } else {
-                    System.out.println("EchoBox: ⚠️ Invalid task number!");
+                    System.out.println("EchoBox: Invalid task number!");
                 }
                 continue;
             }
@@ -123,7 +126,7 @@ public class EchoBox {
                     System.out.println("EchoBox: OK, I've unmarked this task. Let's get it done soon! 💪");
                     System.out.println(tasks[taskNum]); // Use `toString()` to show updated task
                 } else {
-                    System.out.println("EchoBox: ⚠️ Invalid task number!");
+                    System.out.println("EchoBox: Invalid task number!");
                 }
                 continue;
             }
@@ -141,7 +144,7 @@ public class EchoBox {
             if (userInput.startsWith("deadline")) {
                 String[] parts = userInput.substring(9).split(" /by ");
                 if (parts.length < 2) {
-                    System.out.println("EchoBox: ⚠️ Incorrect format! Use: deadline <desc> /by <time>");
+                    System.out.println("EchoBox: Incorrect format! Use: deadline <desc> /by <time>");
                     continue;
                 }
                 tasks[taskCount] = new Deadline(parts[0], parts[1]);
@@ -155,7 +158,7 @@ public class EchoBox {
             if (userInput.startsWith("event")) {
                 String[] parts = userInput.substring(6).split(" /from | /to ");
                 if (parts.length < 3) {
-                    System.out.println("EchoBox: ⚠️ Incorrect format! Use: event <desc> /from <start> /to <end>");
+                    System.out.println("EchoBox: Incorrect format! Use: event <desc> /from <start> /to <end>");
                     continue;
                 }
                 tasks[taskCount] = new Event(parts[0], parts[1], parts[2]);
