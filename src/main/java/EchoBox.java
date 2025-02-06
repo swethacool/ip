@@ -12,7 +12,7 @@ public class EchoBox {
         }
 
         public String getStatusIcon() {
-            return (isDone ? "[X]" : "[ ] "); 
+            return (isDone ? "[X]" : "[ ] ");
         }
 
         public void markAsDone() {
