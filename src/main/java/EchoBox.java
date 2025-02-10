@@ -14,7 +14,7 @@ public class EchoBox {
 
         public String getStatusIcon() {
             return (isDone ? "[X]" : "[ ] ");
-        }
+        }   
 
         public void markAsDone() {
             isDone = true;
@@ -166,6 +166,7 @@ public class EchoBox {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(tasks[taskCount - 1]);
                 System.out.println("Now you have " + taskCount + " tasks in the list.");
+                continue;
             }
         }
     }
