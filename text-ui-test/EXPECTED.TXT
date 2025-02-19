@@ -1,5 +1,8 @@
 Hello! I'm EchoBox
 How can I help you today?
-EchoBox: Hey there! How is your day?
+Got it. I've added this task:
+[T][ ]  Buy groceries
+Now you have 1 tasks in the list.
 Here are the tasks in your list:
+1. [T][ ]  Buy groceries
 EchoBox: Bye! Don't forget to take breaks! See you soon!
