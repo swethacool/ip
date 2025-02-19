@@ -25,4 +25,8 @@ public class Task {
     public String toString() {
         return getStatusIcon() + " " + description;
     }
+    // Convert task to string format for saving (e.g., "T | 1 | read book")
+    public String toFileString() {
+        return "T | " + (isDone ? "1" : "0") + " | " + description;
+    }
 }
