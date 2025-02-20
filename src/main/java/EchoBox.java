@@ -1,20 +1,22 @@
-//import java.io.ByteArrayInputStream;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import task.Task;
 import task.Todo;
 import task.Deadline;
 import task.Event;
+import task.DataManager; // if it's in the task package
+import java.util.List;
+
+
 
 public class EchoBox {
     private static final String EXIT_COMMAND = "bye";
-    private static final ArrayList<Task> tasks = new ArrayList<>(); //use of dynamic array
-
+    private static List<Task> tasks = new ArrayList<>(); //use of dynamic array
     public static void main(String[] args) {
         System.out.println("Hello! I'm EchoBox");
         System.out.println("How can I help you today?");
-        //String simulatedInput = "Hello\nlist\nbye\n"; // Simulated user inputs
-        //System.setIn(new ByteArrayInputStream(simulatedInput.getBytes())); // Simulate input for Scanner
+        tasks = DataManager.loadTasks();  // Load tasks from file
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String userInput = scanner.nextLine().trim();
@@ -101,6 +103,7 @@ public class EchoBox {
             throw new EchoBoxException("EchoBox: Oops! Task number out of range.");
         }
         Task removedTask = tasks.remove(taskNum);
+        DataManager.saveTasks(tasks);  // Save the tasks to file
         System.out.println("EchoBox: Noted. I've removed this task:");
         System.out.println("  " + removedTask);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -116,6 +119,7 @@ public class EchoBox {
             throw new EchoBoxException("EchoBox: Oops! Task number out of range.");// Ensures valid range
         }
         tasks.get(taskNum).markAsDone(); // Marks task as done
+        DataManager.saveTasks(tasks);  // Save the tasks to file
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + tasks.get(taskNum));
     }
@@ -130,6 +134,7 @@ public class EchoBox {
             throw new EchoBoxException("EchoBox: Oops! Task number out of range.");// Ensures valid range
         }
         tasks.get(taskNum).unmarkAsDone(); // Marks task as not done
+        DataManager.saveTasks(tasks);  // Save the tasks to file
         System.out.println("EchoBox: OK, I've unmarked this task. Let's get it done soon! 💪");
         System.out.println("  " + tasks.get(taskNum)); // Displays updated task
     }
@@ -141,6 +146,7 @@ public class EchoBox {
         }
         String taskDescription = parts[1].trim(); // Get the task description
         tasks.add(new Todo(taskDescription)); // Create the new Todo task
+        DataManager.saveTasks(tasks);  // Save the tasks to file
         printTaskAdded();
     }
 
@@ -150,6 +156,7 @@ public class EchoBox {
             throw new EchoBoxException("EchoBox: Incorrect format! Use: deadline <desc> /by <time>");
         }
         tasks.add(new Deadline(parts[0], parts[1]));
+        DataManager.saveTasks(tasks);  // Save the tasks to file
         printTaskAdded();
     }
 
@@ -162,6 +169,7 @@ public class EchoBox {
             throw new EchoBoxException("EchoBox: Task description cannot be empty!");
         }
         tasks.add(new Event(parts[0], parts[1], parts[2]));
+        DataManager.saveTasks(tasks);  // Save the tasks to file
         printTaskAdded();
     }
 

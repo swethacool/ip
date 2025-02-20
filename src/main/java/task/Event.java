@@ -11,4 +11,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
+
+    // Convert Event object to the string format for saving to file
+    public String toFileString() {
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+    }
 }
