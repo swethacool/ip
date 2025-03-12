@@ -2,187 +2,44 @@ import task.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The Parser class handles interpreting and executing user commands.
- * It connects the user interface, task list, and storage components.
- */
 public class Parser {
-    private final Ui ui; // Handles user input and output
-    private final TaskList tasks; // The list of tasks being managed
-    private final Storage storage; // Manages saving/loading tasks to/from storage
-
-    public Parser(Ui ui, TaskList tasks, Storage storage) {
-        this.ui = ui;
-        this.tasks = tasks;
-        this.storage = storage;
-    }
-
-    /**
-     * Parses the user's input and executes the corresponding command.
-     * @param input The user's command input.
-     * @return true if the user exits the program, false otherwise.
-     */
-    public boolean parseAndExecute(String input) {
+    public static Command parse(String input) {
         String command = input.trim().toLowerCase();
-
-        try {
-            if (command.equals("bye")) {
-                return true;
-            }
-            else if (command.equals("list")) {
-                handleList();
-            }
-            else if (command.startsWith("mark ")) {
-                handleMark(input);
-            }
-            else if (command.startsWith("unmark ")) {
-                handleUnmark(input);
-            }
-            else if (command.startsWith("find ")) {
-                handleFind(input); // Handle the find command
-            }
-            else if (command.startsWith("todo ")) {
-                handleAddTodo(input);
-            }
-            else if (command.startsWith("deadline ")) {
-                handleAddDeadline(input);
-            }
-            else if (command.startsWith("event ")) {
-                handleAddEvent(input);
-            }
-            else if (command.startsWith("delete ")) {
-                handleDelete(input);
-            }
-            else if (command.equals("sad")) {
-                ui.showMessage("Don't be sad! Here's a hug :)"); //cheer up message
-            }
-            else if (command.equals("good")) {
-                ui.showMessage("That's good to hear, keep going!"); //cheer up message
-            }
-            else {
-                ui.showMessage("OOPS!!! I'm sorry, but I don't know what that means :-("); //unknown command
-            }
+        if (command.equals("bye")) {
+            return new ByeCommand(input);
         }
-        catch (EchoBoxException e) {
-            ui.showMessage("EchoBox: " + e.getMessage());
+        else if (command.equals("list")) {
+            return new ListCommand(input);
         }
-        return false;
-    }
-
-    /**
-     * Displays the current list of tasks.
-     */
-    private void handleList() {
-        List<Task> taskList = tasks.getTasks();
-        if (taskList.isEmpty()) {
-            ui.showMessage("EchoBox: No tasks in your list!");
+        else if (command.startsWith("mark ")) {
+            return new MarkCommand(input);
+        }
+        else if (command.startsWith("unmark ")) {
+            return new UnmarkCommand(input);
+        }
+        else if (command.startsWith("find ")) {
+            return new FindCommand(input);
+        }
+        else if (command.startsWith("todo ")) {
+            return new TodoCommand(input);
+        }
+        else if (command.startsWith("deadline ")) {
+            return new DeadlineCommand(input);
+        }
+        else if (command.startsWith("event ")) {
+            return new EventCommand(input);
+        }
+        else if (command.startsWith("delete ")) {
+            return new DeleteCommand(input);
+        }
+        else if (command.equals("sad")) {
+            return new FeelingsCommand(input, true);
+        }
+        else if (command.equals("good")) {
+            return new FeelingsCommand(input, false);
         }
         else {
-            for (int i = 0; i < taskList.size(); i++) {
-                ui.showMessage((i + 1) + ". " + taskList.get(i));
-            }
+            return new Command(input);
         }
-    }
-
-    /**
-     * Marks a task as done based on user input.
-     */
-    private void handleMark(String input) throws EchoBoxException {
-        int index = parseIndex(input);
-        tasks.getTask(index).markAsDone();
-        storage.saveTasks(tasks.getTasks());
-        ui.showMessage("Nice! I've marked this task as done:\n  " + tasks.getTask(index));
-    }
-
-    /**
-     * Unmarks a completed task based on user input.
-     */
-    private void handleUnmark(String input) throws EchoBoxException {
-        int index = parseIndex(input);
-        tasks.getTask(index).unmarkAsDone();
-        storage.saveTasks(tasks.getTasks());
-        ui.showMessage("OK, I've unmarked this task:\n  " + tasks.getTask(index));
-    }
-
-    /**
-     * Searches task based on the keyword provided by the user
-     */
-    private void handleFind(String input) throws EchoBoxException {
-        String keyword = input.substring(5).trim(); // Extract keyword after 'find '
-        if (keyword.isEmpty()) {
-            ui.showMessage("OOPS!!! Please provide a keyword to search for.");
-            return;
-        }
-        List<Task> matchingTasks = new ArrayList<>();
-
-        // Loop through all tasks and check if the description contains the keyword
-        for (Task task : tasks.getTasks()) {
-            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                matchingTasks.add(task);
-            }
-        }
-        if (matchingTasks.isEmpty()) {
-            ui.showMessage("No tasks found with the keyword: " + keyword); //no match
-        }
-        else {
-            ui.showMessage("Here are the matching tasks in your list:"); //match spotted
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                ui.showMessage((i + 1) + ". " + matchingTasks.get(i));
-            }
-        }
-    }
-
-    /**
-     * Adds a Todo task based on user input.
-     */
-    private void handleAddTodo(String input) throws EchoBoxException {
-        String desc = input.substring(5).trim();
-        if (desc.isEmpty()) throw new EchoBoxException("Task description cannot be empty!");
-        tasks.addTask(new Todo(desc));
-        storage.saveTasks(tasks.getTasks());
-        ui.showMessage("Got it. I've added this task:\n  " + tasks.getTask(tasks.size() - 1));
-    }
-
-    /**
-     * Adds a Deadline task based on user input.
-     */
-    private void handleAddDeadline(String input) throws EchoBoxException {
-        String[] parts = input.substring(9).split(" /by ", 2);
-        if (parts.length < 2) throw new EchoBoxException("Incorrect format! Use: deadline <desc> /by <time>");
-        tasks.addTask(new Deadline(parts[0], parts[1]));
-        storage.saveTasks(tasks.getTasks());
-        ui.showMessage("Got it. I've added this deadline:\n  " + tasks.getTask(tasks.size() - 1));
-    }
-
-    /**
-     * Adds an Event task based on user input.
-     */
-    private void handleAddEvent(String input) throws EchoBoxException {
-        String[] parts = input.substring(6).split(" /from | /to ", 3);
-        if (parts.length < 3) throw new EchoBoxException("Incorrect format! Use: event <desc> /from <start> /to <end>");
-        tasks.addTask(new Event(parts[0], parts[1], parts[2]));
-        storage.saveTasks(tasks.getTasks());
-        ui.showMessage("Got it. I've added this event:\n  " + tasks.getTask(tasks.size() - 1));
-    }
-
-    /**
-     * Deletes a task based on user input.
-     */
-    private void handleDelete(String input) throws EchoBoxException {
-        int index = parseIndex(input);
-        Task removed = tasks.deleteTask(index);
-        storage.saveTasks(tasks.getTasks());
-        ui.showMessage("Noted. I've removed this task:\n  " + removed);
-    }
-
-    /**
-    * Parses and validates the task index from user input.
-    */
-    private int parseIndex(String input) throws EchoBoxException {
-        String[] parts = input.split(" ");
-        if (parts.length < 2 || !parts[1].matches("\\d+")) throw new EchoBoxException("Invalid task number!");
-        int index = Integer.parseInt(parts[1]) - 1;
-        if (index < 0 || index >= tasks.size()) throw new EchoBoxException("Task number out of range!");
-        return index;
     }
 }

@@ -6,7 +6,6 @@ public class EchoBox {
     private Storage storage; // Handles loading and saving tasks to a file
     private TaskList tasks; // Holds the current list of tasks
     private Ui ui; // Manages interactions with the user (input/output)
-    private Parser parser; // Parses and executes user commands
 
     /**
      * Constructs an EchoBox instance.
@@ -24,7 +23,6 @@ public class EchoBox {
             ui.showLoadingError(e.getMessage()); //loading failure shows error
             tasks = new TaskList();
         }
-        parser = new Parser(ui, tasks, storage); // Parser has access to everything needed
     }
 
     /**
@@ -35,8 +33,14 @@ public class EchoBox {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            String input = ui.readCommand();
-            isExit = parser.parseAndExecute(input);
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(ui, tasks, storage);
+                isExit = c.isExit();
+            } catch (EchoBoxException e) {
+                ui.showMessage("EchoBox: " + e.getMessage());
+            }
         }
         ui.showExit();
     }
