@@ -1,5 +1,9 @@
 package task;
 
+/**
+ * Represents a task with a description and a completion status.
+ * This is the base class for all task types, such as Deadline, Event, etc.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

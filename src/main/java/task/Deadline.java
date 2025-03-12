@@ -1,5 +1,9 @@
 package task;
 
+/**
+ * Represents a task with a deadline. Inherits from the Task class.
+ * A Deadline task has a description and a time by which it needs to be completed.
+ */
 public class Deadline extends Task {
     protected String by;
     public Deadline(String description, String by) {

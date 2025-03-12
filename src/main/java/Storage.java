@@ -2,6 +2,10 @@ import task.Task;
 import java.util.List;
 import task.DataManager;
 
+/**
+ * The Storage class handles loading and saving tasks to and from a file.
+ * It uses DataManager to perform the actual file operations such load and save.
+ */
 public class Storage {
     private final String filePath;
 

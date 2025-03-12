@@ -8,6 +8,12 @@ public class EchoBox {
     private Ui ui; // Manages interactions with the user (input/output)
     private Parser parser; // Parses and executes user commands
 
+    /**
+     * Constructs an EchoBox instance.
+     * Initializes the UI, storage, and parser components.
+     * Attempts to load the tasks from the specified file.
+     *filePath The path to the file where tasks are stored.
+     */
     public EchoBox(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +27,10 @@ public class EchoBox {
         parser = new Parser(ui, tasks, storage); // Parser has access to everything needed
     }
 
+    /**
+     * Runs the main loop of the EchoBox application.
+     * Reads user input, parses and executes commands until the user exits.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

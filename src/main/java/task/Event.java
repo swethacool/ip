@@ -1,5 +1,9 @@
 package task;
 
+/**
+ * Represents a task with a time range. Inherits from the Task class.
+ * An Event task has a description and a time range defined by the start and end times.
+ */
 public class Event extends Task {
     protected String from, to;
     public Event(String description, String from, String to) {

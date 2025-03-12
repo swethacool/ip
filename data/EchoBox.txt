@@ -5,5 +5,4 @@ D | 0 | return book | Sunday
 T | 0 | read books and help with chores
 T | 0 | eggs
 T | 1 | eat food
-T | 0 | study a lot
-D | 0 | <homework> | <8pm>
+T | 1 | study a lot

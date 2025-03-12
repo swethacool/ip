@@ -6,7 +6,6 @@ import java.util.List;
  * The Parser class handles interpreting and executing user commands.
  * It connects the user interface, task list, and storage components.
  */
-
 public class Parser {
     private final Ui ui; // Handles user input and output
     private final TaskList tasks; // The list of tasks being managed
@@ -18,6 +17,11 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Parses the user's input and executes the corresponding command.
+     * @param input The user's command input.
+     * @return true if the user exits the program, false otherwise.
+     */
     public boolean parseAndExecute(String input) {
         String command = input.trim().toLowerCase();
 

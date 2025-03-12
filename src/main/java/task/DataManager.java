@@ -3,7 +3,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Manages loading and saving tasks to and from a file.
+ * It handles file operations, including checking the existence of the file
+ * and ensuring the necessary directories are created.
+ */
 public class DataManager {
     private static final String FILE_PATH = "./data/EchoBox.txt"; // File path for the task list
 
@@ -16,8 +20,13 @@ public class DataManager {
         }
     }
 
-
-    // Method to load tasks from the file
+    /**
+     * Loads the list of tasks from the file.
+     * It reads the file, parses each task, and returns a list of Task objects.
+     * If the file does not exist, an empty list is returned.
+     *
+     * @return A list of tasks read from the file.
+     */
     public static List<Task> loadTasks() {
         List<Task> tasks = new ArrayList<>();
         File file = new File(FILE_PATH);
@@ -69,8 +78,12 @@ public class DataManager {
         return tasks;
     }
 
-
-    // Method to save tasks to the file
+    /**
+     * Saves the given list of tasks to the file.
+     * Each task is converted into a string format and written to the file.
+     *
+     * @param tasks The list of tasks to be saved.
+     */
     public static void saveTasks(List<Task> tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task task : tasks) {
