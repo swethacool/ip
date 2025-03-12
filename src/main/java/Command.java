@@ -1,3 +1,8 @@
+/**
+ * Represents a generic command in the EchoBox application.
+ * This class serves as a base class for specific commands such as ByeCommand, ListCommand, etc.
+ * It handles the basic functionality of a command, including parsing task indices and defining the exit flag.
+ */
 public class Command {
     protected String input;
     protected boolean exit;
@@ -6,11 +11,9 @@ public class Command {
         this.input = input;
         exit = false;
     }
-
     void execute(Ui ui, TaskList tasks, Storage storage) throws EchoBoxException{
         ui.showMessage("OOPS!!! I'm sorry, but I don't know what that means :-("); //unknown command
     }
-
     public boolean isExit(){
         return exit;
     }

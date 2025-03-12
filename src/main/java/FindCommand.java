@@ -3,11 +3,14 @@ import task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a command that searches for tasks containing a specific keyword in their description.
+ * The command extracts the keyword from the input, searches the task list, and displays matching tasks.
+ */
 public class FindCommand extends Command{
     FindCommand(String input){
         super(input);
     }
-
     @Override
     void execute(Ui ui, TaskList tasks, Storage storage) throws EchoBoxException {
         String keyword = input.substring(5).trim(); // Extract keyword after 'find '

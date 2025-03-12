@@ -6,7 +6,6 @@ public class EchoBoxException extends Exception {
 
     /**
      * Constructs a new EchoBoxException with the specified detail message.
-     *
      * @param message The detail message to be passed to the Exception constructor.
      */
     public EchoBoxException(String message) {

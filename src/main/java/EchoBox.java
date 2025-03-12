@@ -28,6 +28,7 @@ public class EchoBox {
     /**
      * Runs the main loop of the EchoBox application.
      * Reads user input, parses and executes commands until the user exits.
+     * If any errors occur during execution, they are caught and displayed to the user.
      */
     public void run() {
         ui.showWelcome();
@@ -44,7 +45,6 @@ public class EchoBox {
         }
         ui.showExit();
     }
-
     public static void main(String[] args) {
         new EchoBox("./data/EchoBox.txt").run();
     }

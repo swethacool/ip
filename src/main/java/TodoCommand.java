@@ -1,5 +1,10 @@
 import task.Todo;
 
+/**
+ * The TodoCommand class represents a command to add a Todo task.
+ * It parses the user input, validates the description, creates a new Todo task,
+ * and updates the task list and storage.
+ */
 public class TodoCommand extends Command{
     TodoCommand(String input){
         super(input);

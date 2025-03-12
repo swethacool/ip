@@ -1,7 +1,10 @@
 import task.Task;
-
 import java.util.List;
 
+/**
+ * Represents a command that lists all the tasks in the current task list.
+ * If the task list is empty, it displays a message indicating so. Otherwise, it displays all tasks.
+ */
 public class ListCommand extends Command{
    ListCommand(String input){
        super(input);

@@ -1,6 +1,12 @@
 import task.Deadline;
 import task.Event;
 
+/**
+ * Represents a command that adds an event to the task list.
+ * The event command expects the format: "event <desc> /from <start> /to <end>".
+ * It parses the user input, creates an Event object, and adds it to the task list.
+ * Afterward, the task list is saved and the user is shown a confirmation message.
+ */
 public class EventCommand extends Command{
     EventCommand(String input){
         super(input);

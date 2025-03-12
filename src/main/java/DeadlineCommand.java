@@ -1,6 +1,12 @@
 import task.Deadline;
 import task.Todo;
 
+/**
+ * Represents a command to add a deadline task.
+ * Parses the user input to create a {@link Deadline} task and adds it to the task list.
+ * Saves the task to storage and shows a confirmation message.
+ * Throws an {@link EchoBoxException} for invalid input format.
+ */
 public class DeadlineCommand extends Command{
     DeadlineCommand(String input){
         super(input);

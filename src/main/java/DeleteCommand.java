@@ -1,6 +1,12 @@
 import task.Event;
 import task.Task;
 
+/**
+ * Represents a command to delete a task.
+ * Parses the user input to identify the task index, deletes the task from the task list,
+ * and updates the storage. Displays a confirmation message.
+ * Throws an {@link EchoBoxException} for invalid task index.
+ */
 public class DeleteCommand extends Command{
     DeleteCommand(String input){
         super(input);

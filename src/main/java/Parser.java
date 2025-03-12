@@ -2,7 +2,16 @@ import task.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Parser class is responsible for parsing user input and creating the corresponding command objects.
+ * It determines the type of command based on the input string and returns the appropriate Command object.
+ */
 public class Parser {
+
+    /**
+     * Parses the user input and returns the corresponding Command object.
+     * It checks the input for specific keywords or command patterns and creates the relevant Command.
+     */
     public static Command parse(String input) {
         String command = input.trim().toLowerCase();
         if (command.equals("bye")) {

@@ -1,3 +1,8 @@
+/**
+ * Represents a command that responds to the user's emotional state.
+ * The command displays a message based on whether the user is feeling sad or not.
+ * If the user is sad, a message of encouragement is shown; otherwise, a positive message is displayed.
+ */
 public class FeelingsCommand extends Command{
     private boolean isSad;
     FeelingsCommand(String input, boolean isSad){

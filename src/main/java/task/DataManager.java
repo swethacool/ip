@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class DataManager {
     private static final String FILE_PATH = "./data/EchoBox.txt"; // File path for the task list
-
-
     // Ensure data folder exists
     static {
         File folder = new File("./data");
@@ -30,13 +28,10 @@ public class DataManager {
     public static List<Task> loadTasks() {
         List<Task> tasks = new ArrayList<>();
         File file = new File(FILE_PATH);
-
-
         // Check if file exists, if not return empty task list
         if (!file.exists()) {
             return tasks;
         }
-
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -47,8 +42,7 @@ public class DataManager {
                 String description = parts[2];
                 Task task;
 
-
-                // Create tasks based on type (you can add more types like Deadline, Event)
+                // Create tasks based on type
                 switch (taskType) {
                     case "T":
                         task = new Todo(description);
@@ -81,7 +75,6 @@ public class DataManager {
     /**
      * Saves the given list of tasks to the file.
      * Each task is converted into a string format and written to the file.
-     *
      * @param tasks The list of tasks to be saved.
      */
     public static void saveTasks(List<Task> tasks) {
