@@ -1,4 +1,5 @@
 import task.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,9 @@ public class Parser {
             }
             else if (command.startsWith("unmark ")) {
                 handleUnmark(input);
+            }
+            else if (command.startsWith("find ")) {
+                handleFind(input); // Handle the find command
             }
             else if (command.startsWith("todo ")) {
                 handleAddTodo(input);
@@ -94,6 +98,34 @@ public class Parser {
         tasks.getTask(index).unmarkAsDone();
         storage.saveTasks(tasks.getTasks());
         ui.showMessage("OK, I've unmarked this task:\n  " + tasks.getTask(index));
+    }
+
+    /**
+     * Searches task based on the keyword provided by the user
+     */
+    private void handleFind(String input) throws EchoBoxException {
+        String keyword = input.substring(5).trim(); // Extract keyword after 'find '
+        if (keyword.isEmpty()) {
+            ui.showMessage("OOPS!!! Please provide a keyword to search for.");
+            return;
+        }
+        List<Task> matchingTasks = new ArrayList<>();
+
+        // Loop through all tasks and check if the description contains the keyword
+        for (Task task : tasks.getTasks()) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            ui.showMessage("No tasks found with the keyword: " + keyword); //no match
+        }
+        else {
+            ui.showMessage("Here are the matching tasks in your list:"); //match spotted
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                ui.showMessage((i + 1) + ". " + matchingTasks.get(i));
+            }
+        }
     }
 
     /**
