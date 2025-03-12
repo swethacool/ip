@@ -3,8 +3,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DataManager {
     private static final String FILE_PATH = "./data/EchoBox.txt"; // File path for the task list
+
 
     // Ensure data folder exists
     static {
@@ -14,15 +16,18 @@ public class DataManager {
         }
     }
 
+
     // Method to load tasks from the file
     public static List<Task> loadTasks() {
         List<Task> tasks = new ArrayList<>();
         File file = new File(FILE_PATH);
 
+
         // Check if file exists, if not return empty task list
         if (!file.exists()) {
             return tasks;
         }
+
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
@@ -32,6 +37,7 @@ public class DataManager {
                 boolean isDone = parts[1].equals("1");
                 String description = parts[2];
                 Task task;
+
 
                 // Create tasks based on type (you can add more types like Deadline, Event)
                 switch (taskType) {
@@ -62,6 +68,7 @@ public class DataManager {
         }
         return tasks;
     }
+
 
     // Method to save tasks to the file
     public static void saveTasks(List<Task> tasks) {
