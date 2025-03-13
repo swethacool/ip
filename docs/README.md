@@ -9,67 +9,67 @@ EchoBox is a simple, user-friendly chatbot designed to help you organize your ta
 ## **Table of contents** 
 
 <ins>Features:</ins> 
-//italicise from 1 to 6
-_1. Add Deadlines_ 
-_2. Add Events_ 
-_3. Add ToDos_
-_4. Mark tasks as done_ 
-_5. Mark tasks as undone_ 
-_4. Find tasks_
-_5. List the available tasks_ 
-_6. Delete unwanted tasks_
+
+1. _Add Deadlines_
+2. _Add Events_
+3. _Add ToDos_
+4. _Mark tasks as done_
+5. _Mark tasks as undone_
+6. _Find tasks_
+7. _List the available tasks_
+8. _Delete unwanted tasks_
 
 ### **Add deadlines** 
-Add a task with a due date using deadline _<description> /by <due date>._
+Add a task with a due date using deadline `<description> /by <due date>`.
 
 #### Command: deadline Complete the project report /by 15-04-2025
 #### Outcome: 
 ![img_1.png](img_1.png)
 
 ### **Add Events** 
-Add an event using event _<description> /from <start> /to <end>._
+Add an event using event `<description> /from <start> /to <end>`.
 
 #### Command: event Project meeting /from Monday 2pm /to Monday 4pm
 #### Outcome: 
 ![img_2.png](img_2.png)
 
 ### **Add ToDos** 
-Add a task with todo _<description>_
+Add a task with todo: `<description>`
 
 #### Command: todo read books 
 #### Outcome:
 ![img_3.png](img_3.png)
 
 ### **Mark tasks as done** 
-Mark a finished task as done with mark _<task number>_.
+Mark a finished task as done with mark `<task number>`.
 
 #### Command: mark 1
 #### Outcome:
 ![img_4.png](img_4.png)
 
 ### **Mark tasks as not done** 
-Mark uncompleted task as not done with mark _<task number>._
+Mark uncompleted task as not done with mark `<task number>`.
 
 #### Command: unmark 1
 #### Outcome:
 ![img_5.png](img_5.png)
 
 ### **Find task**   
-Search tasks by keyword using find _<keyword>._
+Search tasks by keyword using find `<keyword>`.
 
 #### Command: Find book
 #### Outcome: 
 ![img_6.png](img_6.png)
 
 ### **List tasks**   
-View all tasks with _<list>_
+View all tasks with `<list>`.
 
 #### Command: list
 #### Outcome:
 ![img_7.png](img_7.png)
 
 ### **Delete tasks**   
-Delete an unwanted task using delete _<task number>._
+Delete an unwanted task using delete `<task number>`.
 
 #### Command: delete 2
 #### Outcome:
